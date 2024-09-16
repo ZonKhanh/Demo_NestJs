@@ -30,26 +30,25 @@ export class Patient { // Định nghĩa class Patient đại diện cho bảng 
   @IsNotEmpty() // Không được để trống.
   @MaxLength(100, { message: 'Exceeds $constraint1 characters allowed' })
   @prop({ required: true }) // Bắt buộc, phải duy nhất và được lập chỉ mục.
-  firstName: string; // Tên tài khoản bệnh nhân.
-
+  firstName: string; 
   @IsString() 
   @IsNotEmpty()
   @MaxLength(100, { message: 'Exceeds $constraint1 characters allowed' })
   @prop({ required: true }) 
-  lastName: string; // Tên đầy đủ của bệnh nhân.
+  lastName: string; 
 
   @IsString() 
-  @IsEmail() // Phải là một email hợp lệ.
+  @IsEmail() 
   @IsOptional() 
   @MaxLength(100, { message: 'Exceeds $constraint1 characters allowed' })
   @prop({ required: false }) 
-  email: string; // Email của bệnh nhân.
+  email: string; 
 
   @IsString() 
   @IsOptional() 
   @MaxLength(20, { message: 'Exceeds $constraint1 characters allowed' })
   @prop({ unique: true }) 
-  phone: string; // Số điện thoại của bệnh nhân.
+  phone: string; 
 
   @IsString() 
   @IsNotEmpty()
@@ -66,26 +65,26 @@ export class Patient { // Định nghĩa class Patient đại diện cho bảng 
   @IsInt() 
   @IsDefined() 
   @prop({ enum: SexState, default: SexState.MALE, index: true }) 
-  gender: SexState; // Trạng thái của bệnh nhân (Active hoặc UnActive).
+  gender: SexState; 
 
   @IsDate() // Ràng buộc kiểu dữ liệu là ngày.
   @IsOptional() // Không bắt buộc.
   @prop({ required: false }) // Khai báo trong schema với MongoDB.
-  dob: Date; // Ngày tháng nhập vào
+  dob: Date; 
 
 
   @IsIn(PATIENT_STATUS) 
   @IsInt() 
   @IsDefined() 
   @prop({ enum: PatientStatus, default: PatientStatus.ACTIVE, index: true }) 
-  status: PatientStatus; // Trạng thái của bệnh nhân (Online hoặc Offline).
+  status: PatientStatus; 
 
   // @ArrayUnique() 
   // @prop({ type: () => [String], ref: () => Role }) 
   // roles?: Ref<Role, string>[] | Role[]; // Danh sách vai trò của bệnh nhân, tham chiếu tới bảng Role.
 
   @prop({ default: Date.now, immutable: true }) 
-  createdAt?: Date; // Ngày tạo, không thể thay đổi sau khi khởi tạo.
+  createdAt?: Date; 
 
   @prop({ default: Date.now }) 
   updatedAt?: Date; 
