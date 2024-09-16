@@ -80,7 +80,9 @@ export class PatientController {
       paginateQuery.$or = [
         { firstName: keywordRegExp }, 
         { lastName: keywordRegExp }, 
+        { gender: keywordRegExp },
         { phone: keywordRegExp }, 
+        { address: keywordRegExp },
         { email: keywordRegExp }, 
       ];
     }
