@@ -16,7 +16,7 @@ import {
 export class CreatePatientDto {
 
   // Tên người dùng, không được để trống, phải là chuỗi và được định nghĩa
-  @IsString() // Trường phải là chuỗi.
+  @IsString() 
   @IsNotEmpty({ message: "first name?"}) 
   @MaxLength(100)
   firstName: string; 
@@ -26,7 +26,7 @@ export class CreatePatientDto {
   @MaxLength(100)
   lastName: string; 
 
-  // Email của bệnh nhân, phải là email hợp lệ và tùy chọn
+  // email hợp lệ và tùy chọn
   @IsString()
   @IsEmail()
   @IsOptional()
@@ -57,7 +57,6 @@ export class CreatePatientDto {
   @IsOptional()
   gender: number = 1;
 
-  // Trạng thái của bệnh nhân, là số nguyên và mặc định là 1
   @IsInt()
   status: number = 1;
 }

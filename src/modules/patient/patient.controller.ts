@@ -11,11 +11,11 @@ import {
   UseGuards,
   Patch,
   Req,
-  StreamableFile,
-  Res,
-  UseInterceptors,
-  UploadedFile,
-  BadRequestException,
+  // StreamableFile,
+  // Res,
+  // UseInterceptors,
+  // UploadedFile,
+  // BadRequestException,
 } from "@nestjs/common";
 import { PatientService } from "./patient.service";
 import { CreatePatientDto, PatientsDTO } from "./dto/create-patient.dto";
@@ -29,18 +29,18 @@ import {
 } from "@app/utils/paginate";
 import { Patient } from "./entities/patient.entity";
 import { PatientPaginateQueryDTO } from "./dto/query-patient.dto";
-import { Role } from "../role/entities/role.entity";
-import { RoleService } from "../role/role.service";
+// import { Role } from "../role/entities/role.entity";
+// import { RoleService } from "../role/role.service";
 import {
   QueryParams,
   QueryParamsResult,
 } from "@app/decorators/queryparams.decorator";
 import { MongooseDoc } from "@app/interfaces/mongoose.interface";
-import { FileInterceptor } from "@nestjs/platform-express";
-import type { Response } from "express";
-import moment from 'moment';
+// import { FileInterceptor } from "@nestjs/platform-express";
+// import type { Response } from "express";
+// import moment from 'moment';
 import { JwtAuthGuard } from "@app/guards/jwt-auth.guard";
-import { Request } from 'express'; // Ensure this is from 'express'
+// import { Request } from 'express'; // Ensure this is from 'express'
 
 @Controller("patient")
 export class PatientController {
@@ -49,7 +49,7 @@ export class PatientController {
     // private readonly roleService: RoleService
   ) { }
 
-  // Endpoint để tạo mới bệnh nhân
+  // Tạo mới bệnh nhân
   @Post()
   @UseGuards(JwtAuthGuard)
   async create(
@@ -78,13 +78,12 @@ export class PatientController {
       const trimmed = lodash.trim(filters.keyword); // Loại bỏ khoảng trắng thừa
       const keywordRegExp = new RegExp(trimmed, "i"); // Tạo biểu thức chính quy để tìm kiếm không phân biệt chữ hoa chữ thường
       paginateQuery.$or = [
-        { firstName: keywordRegExp }, // Tìm kiếm theo trường fullName
-        { lastName: keywordRegExp }, // Tìm kiếm theo trường patientName
-        { phone: keywordRegExp }, // Tìm kiếm theo trường phone
-        { email: keywordRegExp }, // Tìm kiếm theo trường email
+        { firstName: keywordRegExp }, 
+        { lastName: keywordRegExp }, 
+        { phone: keywordRegExp }, 
+        { email: keywordRegExp }, 
       ];
     }
-
     // Lọc theo trạng thái (status)
     if (!lodash.isUndefined(status)) {
       const queryState = status.split(","); // Chia trạng thái thành mảng các trạng thái

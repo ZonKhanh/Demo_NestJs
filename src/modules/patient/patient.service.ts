@@ -16,7 +16,6 @@ import {
   PaginateOptions,
 } from "@app/utils/paginate";
 import { PatientStatus } from "@app/constants/biz.constant";
-import { AuthPayload } from "../auth/auth.interface";
 import moment from 'moment';
 
 @Injectable()
@@ -40,7 +39,7 @@ export class PatientService {
 
   // Trong PatientService
   async create(createPatientDto: CreatePatientDto, userName: string): Promise<MongooseDoc<Patient>> {
-    // Tìm người dùng theo userName
+   
     const user = await this.authService.findUserByUsername(userName);
     const userId = user._id.toString(); 
 
@@ -55,7 +54,7 @@ export class PatientService {
     // Tạo bệnh nhân mới với trường createdBy được gán giá trị
     let patient = await this.patientModel.create({
       ...createPatientDto,
-      createdBy: userId  // Gán giá trị createdBy
+      createdBy: userId  
     });
     // Tìm và trả về bệnh nhân mới tạo
     return await this.findOne(String(patient._id));
@@ -143,10 +142,10 @@ export class PatientService {
   async remove(patientID: MongooseID, userName: string): Promise<MongooseDoc<Patient>> {
     // Tìm người dùng theo userName
     const user = await this.authService.findUserByUsername(userName);
-    const userId = user._id.toString(); // Chuyển đổi thành chuỗi nếu cần
-    // Tìm bệnh nhân để kiểm tra trạng thái
+    const userId = user._id.toString(); 
+   
     const patient = await this.patientModel.findById(patientID).exec();
-    // Kiểm tra xem bệnh nhân có tồn tại không
+
     if (!patient) {
       throw new Error(`Patient id "${patientID}" isn't found`);
     }
@@ -163,7 +162,6 @@ export class PatientService {
           { new: true }
         )
         .exec();
-
       if (!updatedPatient) {
         throw new Error(`Failed to remove patient with id "${patientID}"`);
       }
@@ -174,9 +172,9 @@ export class PatientService {
 
   // Xóa hàng loạt bệnh nhân cùng lúc
   public async batchDelete(patientIDs: MongooseID[], userName: any): Promise<{ updatedPatients: Patient[], errors: string[] }> {
-    // Tìm thông tin của người thực hiện dựa trên tên đăng nhập
+  
     const user = await this.authService.findUserByUsername(userName);
-    const userId = user._id.toString(); // Chuyển đổi thành chuỗi nếu cần
+    const userId = user._id.toString(); 
 
     // Tìm tất cả bệnh nhân có ID trong danh sách patientIDs
     const patients = await this.patientModel.find({ _id: { $in: patientIDs } }).exec();

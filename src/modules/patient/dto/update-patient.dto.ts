@@ -3,8 +3,8 @@ import {
   IsNotEmpty,        
   IsInt,                       
   IsOptional,        
-  ArrayUnique,       
-  ArrayNotEmpty,     
+  // ArrayUnique,       
+  // ArrayNotEmpty,     
   IsEmail,           
   MaxLength,
 } from "class-validator";
