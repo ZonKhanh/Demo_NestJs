@@ -1,0 +1,986 @@
+{
+	"info": {
+		"_postman_id": "3a6365f9-8124-4b11-8dfe-d33a5a1a67a9",
+		"name": "quicksign",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16812875"
+	},
+	"item": [
+		{
+			"name": "LOGIN",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = JSON.parse(responseBody);\r",
+							"postman.clearEnvironmentVariable(\"TOKEN\");\r",
+							"postman.setEnvironmentVariable(\"TOKEN\", data.result.access_token);\r",
+							"pm.environment.unset(\"TOKEN\");\r",
+							"pm.environment.set(\"TOKEN\", data.result.access_token);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"demodemo\",\r\n    \"password\":\"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url_qicksign}}/auth/login",
+					"host": [
+						"{{url_qicksign}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CHANGE PASSWORD",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer  {{TOKEN}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"newPassword\":\"123456\",\r\n    \"password\":\"1234567\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url_qicksign}}/auth/change-password",
+					"host": [
+						"{{url_qicksign}}"
+					],
+					"path": [
+						"auth",
+						"change-password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AUTH TOKEN",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer  {{TOKEN}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url_qicksign}}/auth/auth-token",
+					"host": [
+						"{{url_qicksign}}"
+					],
+					"path": [
+						"auth",
+						"auth-token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "USER GET ID",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer  {{TOKEN}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url_qicksign}}/user/63bedf7be1a3720ed20c0893",
+					"host": [
+						"{{url_qicksign}}"
+					],
+					"path": [
+						"user",
+						"63bedf7be1a3720ed20c0893"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "USER GET LIST",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer  {{TOKEN}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url_qicksign}}/user",
+					"host": [
+						"{{url_qicksign}}"
+					],
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "USER ADD",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer  {{TOKEN}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"userName\": \"validator007\",\r\n \"password\": \"123456\",\r\n \"email\": \"timh@gmail.com\",\r\n \"phone\" : \"0987654327\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url_qicksign}}/user",
+					"host": [
+						"{{url_qicksign}}"
+					],
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "USER EDIT",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer  {{TOKEN}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"fullName\": \"ductai\",\r\n    \"password\": \"123456\",\r\n    \"status\": 1,\r\n    \"email\": \"thaile@gmail.com\",\r\n    \"phone\": \"0987654327\",\r\n    \"avatar\": \"6549b2ce80c213d0efb3c59e\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url_qicksign}}/user/6549c9a904b4aa3a49870289",
+					"host": [
+						"{{url_qicksign}}"
+					],
+					"path": [
+						"user",
+						"6549c9a904b4aa3a49870289"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "USER EDIT STATUS",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer  {{TOKEN}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"userName\": \"validator2\",\r\n \"password\": \"123456\",\r\n \"isSuperAdmin\" : false,\r\n \"status\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url_qicksign}}/user/63abe914ca78b6018d729198",
+					"host": [
+						"{{url_qicksign}}"
+					],
+					"path": [
+						"user",
+						"63abe914ca78b6018d729198"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "USER DELETE",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer  {{TOKEN}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url_qicksign}}/user/63a12bcf2d0bfdc1192aed81",
+					"host": [
+						"{{url_qicksign}}"
+					],
+					"path": [
+						"user",
+						"63a12bcf2d0bfdc1192aed81"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "USER DELETE MANY",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer  {{TOKEN}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"categoryIds\": [\"64e80de881e7beb62135d181\", \"64e80ca81d090f54b5a43c33\"]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url_qicksign}}/user",
+					"host": [
+						"{{url_qicksign}}"
+					],
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SETTTING GET",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer  {{TOKEN}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url_qicksign}}/setting",
+					"host": [
+						"{{url_qicksign}}"
+					],
+					"path": [
+						"setting"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SETTTING EDIT",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer  {{TOKEN}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"web\": [\r\n        {\r\n            \"name\": \"page_size\",\r\n            \"value\": \"90\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url_qicksign}}/setting",
+					"host": [
+						"{{url_qicksign}}"
+					],
+					"path": [
+						"setting"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET LIST PDF",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer  {{TOKEN}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url_qicksign}}/media/manager",
+					"host": [
+						"{{url_qicksign}}"
+					],
+					"path": [
+						"media",
+						"manager"
+					],
+					"query": [
+						{
+							"key": "keyword",
+							"value": "Luong-2023",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET LIST SIGNATURE PDF",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer  {{TOKEN}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url_qicksign}}/media/manager/signature",
+					"host": [
+						"{{url_qicksign}}"
+					],
+					"path": [
+						"media",
+						"manager",
+						"signature"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MEDIA GET ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer  {{TOKEN}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url_qicksign}}/media/manager/6549c152e555418d3bc98344",
+					"host": [
+						"{{url_qicksign}}"
+					],
+					"path": [
+						"media",
+						"manager",
+						"6549c152e555418d3bc98344"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPLOAD AVATAR",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer  {{TOKEN}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "thumbnail",
+							"type": "file",
+							"src": "image/GOGO.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url_qicksign}}/media",
+					"host": [
+						"{{url_qicksign}}"
+					],
+					"path": [
+						"media"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPLOAD SIGNATURE",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer  {{TOKEN}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "thumbnail",
+							"type": "file",
+							"src": "image/UTH.TV.Logo.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url_qicksign}}/media/signature",
+					"host": [
+						"{{url_qicksign}}"
+					],
+					"path": [
+						"media",
+						"signature"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPLOAD PDF",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer  {{TOKEN}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "zinisoft/Luong-2023-DevBackend.pdf"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url_qicksign}}/media/pdf",
+					"host": [
+						"{{url_qicksign}}"
+					],
+					"path": [
+						"media",
+						"pdf"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPLOAD PDF HOME",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer  {{TOKEN}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "zinisoft/Luong-2023-DevBackend.pdf"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url_qicksign}}/media/upload",
+					"host": [
+						"{{url_qicksign}}"
+					],
+					"path": [
+						"media",
+						"upload"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPLOAD MEDIA MULTIPLE",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer  {{TOKEN}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "thumbnail",
+							"type": "file",
+							"src": [
+								"image/m10.jpg",
+								"image/UTH.TV.Logo.png"
+							]
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url_qicksign}}/media/multiple",
+					"host": [
+						"{{url_qicksign}}"
+					],
+					"path": [
+						"media",
+						"multiple"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MEDIA EDIT PDF SIGNED",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer  {{TOKEN}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "CV/QuangHuy-CV-VI.pdf"
+						},
+						{
+							"key": "signedBy",
+							"value": "647d70a57a80a288a9d3e3bf",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url_qicksign}}/media/pdf/654b4ed5f14b261f8ff22801",
+					"host": [
+						"{{url_qicksign}}"
+					],
+					"path": [
+						"media",
+						"pdf",
+						"654b4ed5f14b261f8ff22801"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MEDIA DELETE",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer  {{TOKEN}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url_qicksign}}/media/manager/6549bf8be555418d3bc9832e",
+					"host": [
+						"{{url_qicksign}}"
+					],
+					"path": [
+						"media",
+						"manager",
+						"6549bf8be555418d3bc9832e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MEDIA DELETE MANY",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer  {{TOKEN}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"categoryIds\": [\"64e80de881e7beb62135d181\", \"64e80ca81d090f54b5a43c33\"]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url_qicksign}}/media/manager",
+					"host": [
+						"{{url_qicksign}}"
+					],
+					"path": [
+						"media",
+						"manager"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "TOKEN",
+			"value": ""
+		}
+	]
+}
